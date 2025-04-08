@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import Layout from "@/components/Layout";
 import { motion } from "framer-motion";
 import { AnimatedText } from "@/components/AnimatedText";
-import { 
-  Github, 
-  Code, 
+import {
+  Github,
+  Code,
   MonitorSmartphone,
   Database,
   Bot,
@@ -12,7 +12,7 @@ import {
   Filter,
   Search,
   BarChart,
-  Brain
+  Brain,
 } from "lucide-react";
 
 const Projects = () => {
@@ -25,6 +25,7 @@ const Projects = () => {
 
   const projects = [
     {
+      id: 1,
       title: "Real Time Water Monitoring System",
       description:
         "A web application to monitor water quality parameters in real-time using IoT and MERN Stack.",
@@ -32,9 +33,10 @@ const Projects = () => {
       tags: ["MERN", "IoT"],
       link: "/projects",
       code: "https://github.com/tarunsilam07/Blue_Pulse",
-      category: "iot"
+      category: "iot",
     },
     {
+      id: 2,
       title: "Vibe Nest",
       description:
         "VibeNest is a full-featured social media platform using Next.js and MongoDB",
@@ -42,16 +44,17 @@ const Projects = () => {
       tags: ["NextJs", "MongoDB"],
       link: "/projects",
       code: "https://github.com/MoyillaLaliteswari/VibesNest",
-      category: "web"
+      category: "web",
     },
     {
+      id: 3,
       title: "Blog Website",
       description: "A simple blog website built with EJS and Express.js.",
       image: "blog.png",
       tags: ["ExpressJS", "EJS", "MongoDB"],
       link: "/projects",
       code: "https://github.com/MoyillaLaliteswari/blog",
-      category: "web"
+      category: "web",
     },
     {
       id: 4,
@@ -61,7 +64,7 @@ const Projects = () => {
       tags: ["ExpressJS", "NodeJs", "MongoDB"],
       link: "/projects",
       code: "https://github.com/MoyillaLaliteswari/Url_Shortener",
-      category: "web"
+      category: "web",
     },
   ];
 
@@ -84,18 +87,21 @@ const Projects = () => {
     }
   };
 
-  const filteredProjects = projects.filter(project => {
+  const filteredProjects = projects.filter((project) => {
     const matchesFilter = filter === "all" || project.category === filter;
-    const matchesSearch = project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                          project.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                          project.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
+    const matchesSearch =
+      project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      project.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      project.tags.some((tag) =>
+        tag.toLowerCase().includes(searchTerm.toLowerCase())
+      );
     return matchesFilter && matchesSearch;
   });
 
   const categories = [
     { id: "all", name: "All Projects" },
     { id: "web", name: "Web Development" },
-    { id: "iot", name: "IoT" }
+    { id: "iot", name: "IoT" },
   ];
 
   return (
@@ -116,7 +122,8 @@ const Projects = () => {
             </h1>
             <div className="max-w-3xl mx-auto">
               <p className="text-lg text-muted-foreground">
-                Explore a collection of my recent work across various technologies and domains.
+                Explore a collection of my recent work across various
+                technologies and domains.
               </p>
             </div>
           </motion.div>
@@ -134,13 +141,13 @@ const Projects = () => {
                 <Filter className="mr-2 h-5 w-5 text-muted-foreground" />
                 <span className="mr-4 text-sm font-medium">Filter:</span>
                 <div className="flex flex-wrap gap-2">
-                  {categories.map(category => (
+                  {categories.map((category) => (
                     <button
                       key={category.id}
                       onClick={() => setFilter(category.id)}
                       className={`px-3 py-1.5 text-xs font-medium rounded-full transition-colors ${
-                        filter === category.id 
-                          ? "bg-brand-purple text-white" 
+                        filter === category.id
+                          ? "bg-brand-purple text-white"
                           : "bg-secondary hover:bg-secondary/80 text-muted-foreground"
                       }`}
                     >
@@ -167,49 +174,74 @@ const Projects = () => {
           </motion.div>
 
           {/* Projects Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {filteredProjects.length > 0 ? (
               filteredProjects.map((project, index) => (
                 <motion.div
                   key={project.id}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-                  whileHover={{ y: -5 }}
-                  className="glass-panel rounded-lg overflow-hidden flex flex-col"
+                  transition={{ duration: 0.6, delay: index * 0.2 }}
+                  whileHover={{ scale: 1.03, rotateX: 2, rotateY: -2 }}
+                  className="relative glass-panel rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 cursor-pointer flex flex-col group"
                 >
-                  <div className="relative h-48 overflow-hidden">
-                    <div className="absolute top-3 left-3 bg-secondary/80 backdrop-blur-sm px-3 py-1 rounded-full flex items-center text-xs font-medium z-10">
-                      {getIcon(project.category)}
-                      <span className="ml-1.5 capitalize">{project.category === "iot" ? "IoT" : project.category === "ai" ? "AI & ML" : project.category}</span>
-                    </div>
-                    <img 
-                      src={project.image} 
+                  {/* Image Section */}
+                  <div className="relative h-52 overflow-hidden">
+                    <img
+                      src={project.image}
                       alt={project.title}
-                      className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:blur-[1px]"
                     />
+
+                    {/* Overlay Badge */}
+                    <div className="absolute top-4 left-4 bg-secondary/90 backdrop-blur-md px-3 py-1 rounded-full flex items-center text-xs font-medium z-10 transition-all duration-300 group-hover:scale-105">
+                      {getIcon(project.category)}
+                      <span className="ml-1.5 capitalize">
+                        {project.category === "iot"
+                          ? "IoT"
+                          : project.category === "ai"
+                          ? "AI & ML"
+                          : project.category}
+                      </span>
+                    </div>
+
+                    {/* Image Overlay */}
+                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   </div>
-                  
-                  <div className="p-6 flex-grow">
-                    <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-                    <p className="text-muted-foreground mb-4">{project.description}</p>
-                    
+
+                  {/* Content */}
+                  <div className="p-6 flex-grow flex flex-col">
+                    <h3 className="text-xl font-semibold mb-2 group-hover:text-brand-purple transition-colors duration-300">
+                      {project.title}
+                    </h3>
+                    <p className="text-muted-foreground text-sm mb-4 leading-relaxed line-clamp-3">
+                      {project.description}
+                    </p>
+
+                    {/* Tags */}
                     <div className="flex flex-wrap gap-2 mb-6">
-                      {project.tags.map(tag => (
-                        <span key={tag} className="text-xs py-1 px-3 bg-secondary rounded-full">
+                      {project.tags.map((tag) => (
+                        <motion.span
+                          key={tag}
+                          className="text-xs py-1 px-3 bg-secondary rounded-full hover:bg-brand-purple hover:text-white transition-all duration-300"
+                          whileHover={{ scale: 1.1 }}
+                        >
                           {tag}
-                        </span>
+                        </motion.span>
                       ))}
                     </div>
-                    
-                    <div className="flex justify-center">
+
+                    {/* Source Link */}
+                    <div className="mt-auto flex justify-center">
                       <motion.a
                         href={project.code}
-                        className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors"
-                        whileHover={{ scale: 1.05 }}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center text-muted-foreground hover:text-brand-purple transition-colors duration-300 font-medium"
+                        whileHover={{ scale: 1.07 }}
                         whileTap={{ scale: 0.95 }}
                       >
-                        <Github className="mr-1.5 h-4 w-4" />
+                        <Github className="mr-2 h-5 w-5" />
                         Source Code
                       </motion.a>
                     </div>
@@ -220,9 +252,11 @@ const Projects = () => {
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="col-span-1 md:col-span-2 lg:col-span-3 text-center py-16 glass-panel rounded-lg"
+                className="col-span-1 md:col-span-2 lg:col-span-3 text-center py-16 glass-panel rounded-xl"
               >
-                <p className="text-xl text-muted-foreground">No projects found matching your criteria.</p>
+                <p className="text-xl text-muted-foreground">
+                  No projects found matching your criteria.
+                </p>
                 <button
                   onClick={() => {
                     setFilter("all");

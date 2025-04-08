@@ -181,76 +181,86 @@ const Academics = () => {
           </div>
 
           {/* Key Courses */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.7 }}
-            className="mb-24"
-          >
-            <h2 className="text-3xl font-bold mb-12 text-center">Key Courses</h2>
-            
-            <div className="glass-panel p-10 rounded-lg">
-              <div className="flex items-center justify-center mb-8">
-                <div className="bg-teal-500/10 p-4 rounded-full">
-                  <BookOpen className="h-8 w-8 text-teal-400" />
-                </div>
-              </div>
-              
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {courseHighlights.map((course, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3, delay: 0.8 + index * 0.05 }}
-                    className="flex items-center p-4 bg-secondary/50 rounded-lg"
-                  >
-                    <div className="h-2 w-2 rounded-full bg-teal-400 mr-3" />
-                    <span>{course}</span>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </motion.div>
+          {/* Key Courses */}
+<motion.div
+  initial={{ opacity: 0, y: 30 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.5, delay: 0.7 }}
+  className="mb-24"
+>
+  <h2 className="text-3xl font-bold mb-12 text-center">Key Courses</h2>
 
-          {/* Certifications */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.9 }}
-          >
-            <h2 className="text-3xl font-bold mb-12 text-center">Certifications</h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {certifications.map((cert, index) => (
-                <motion.div
-                  key={cert.id}
-                  initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.4, delay: 1 + index * 0.1 }}
-                  whileHover={{ scale: 1.02 }}
-                  className="glass-panel p-6 rounded-lg"
-                >
-                  <div className="flex items-start">
-                    <div className="bg-teal-500/10 p-3 rounded-lg mr-4 mt-1">
-                      <Award className="h-6 w-6 text-teal-400" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-semibold mb-1">{cert.name}</h3>
-                      <div className="flex items-center text-sm text-muted-foreground mb-3">
-                        <School className="h-4 w-4 mr-1" />
-                        <span>{cert.issuer}</span>
-                        <span className="mx-2">•</span>
-                        <Calendar className="h-4 w-4 mr-1" />
-                        <span>{cert.date}</span>
-                      </div>
-                      <p className="text-muted-foreground">{cert.description}</p>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
+  <div className="glass-panel p-10 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 shadow-lg">
+    <div className="flex items-center justify-center mb-8">
+      <div className="bg-teal-500/10 p-4 rounded-full shadow-inner hover:scale-110 transition duration-300">
+        <BookOpen className="h-8 w-8 text-teal-400" />
+      </div>
+    </div>
+
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {courseHighlights.map((course, index) => (
+        <motion.div
+          key={index}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: 0.8 + index * 0.05 }}
+          whileHover={{ scale: 1.05 }}
+          className="relative flex items-center p-4 bg-gradient-to-br from-[#1e293b]/60 to-[#0f172a]/60 rounded-xl shadow-md border border-cyan-400/10 hover:border-cyan-400 transition-all duration-300"
+        >
+          <div className="absolute inset-0 rounded-xl pointer-events-none opacity-0 hover:opacity-100 transition duration-300 border border-cyan-400/30 shadow-[0_0_10px_#22d3ee88]" />
+          <div className="h-2 w-2 rounded-full bg-teal-400 mr-3 animate-pulse" />
+          <span className="text-white/90">{course}</span>
+        </motion.div>
+      ))}
+    </div>
+  </div>
+</motion.div>
+
+{/* Certifications */}
+<motion.div
+  initial={{ opacity: 0, y: 30 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.5, delay: 0.9 }}
+>
+  <h2 className="text-3xl font-bold mb-12 text-center">Certifications</h2>
+
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+    {certifications.map((cert, index) => (
+      <motion.div
+        key={cert.id}
+        initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.4, delay: 1 + index * 0.1 }}
+        whileHover={{ scale: 1.03 }}
+        className="relative glass-panel p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 shadow-lg hover:shadow-cyan-400/20 transition duration-300"
+      >
+        <div className="absolute inset-0 rounded-2xl pointer-events-none border border-cyan-400/30 opacity-0 hover:opacity-100 transition-all duration-300 shadow-[0_0_10px_#22d3ee99]" />
+
+        <div className="flex items-start">
+          <div className="bg-teal-500/10 p-3 rounded-lg mr-4 mt-1 shadow-inner hover:rotate-6 transition-transform duration-300">
+            <Award className="h-6 w-6 text-teal-400" />
+          </div>
+          <div>
+            <h3 className="text-lg font-semibold mb-1 text-white">{cert.name}</h3>
+            <div className="flex items-center text-sm text-white/60 mb-3 gap-2 flex-wrap">
+              <div className="flex items-center gap-1">
+                <School className="h-4 w-4" />
+                <span>{cert.issuer}</span>
+              </div>
+              <span className="text-xs">•</span>
+              <div className="flex items-center gap-1">
+                <Calendar className="h-4 w-4" />
+                <span>{cert.date}</span>
+              </div>
             </div>
-          </motion.div>
+            <p className="text-sm text-white/80">{cert.description}</p>
+          </div>
+        </div>
+      </motion.div>
+    ))}
+  </div>
+</motion.div>
+
         </div>
       </section>
     </Layout>

@@ -154,11 +154,15 @@ const About = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3, delay: 0.1 * index }}
-                  className="glass-panel p-6 rounded-lg text-center"
+                  whileHover={{ scale: 1.05, rotate: 1 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="glass-panel p-6 rounded-lg text-center cursor-pointer transition-all duration-300 hover:shadow-lg hover:shadow-purple-200"
                 >
-                  <h3 className="font-semibold mb-2">{skill.name}</h3>
+                  <h3 className="font-semibold mb-2 text-lg transition-colors duration-300 group-hover:text-brand-purple">
+                    {skill.name}
+                  </h3>
                   <span
-                    className={`text-xs py-1 px-3 rounded-full ${
+                    className={`text-xs py-1 px-3 rounded-full transition-colors duration-300 ${
                       skill.level === "Advanced"
                         ? "bg-brand-purple/20 text-brand-purple"
                         : skill.level === "Intermediate"
