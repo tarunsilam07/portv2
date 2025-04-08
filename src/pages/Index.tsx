@@ -70,10 +70,10 @@ const Index = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <span className="inline-block py-1 px-3 rounded-full text-xs font-medium bg-teal-500/10 text-teal-400 mb-4">
+            <span className="inline-block py-1 px-3 rounded-full text-xs font-medium bg-brand-purple/10 text-brand-purple mb-4">
               About Me
             </span>
-            <h2 className="text-4xl font-bold mb-6">Who I Am</h2>
+            <h2 className="text-4xl font-bold mb-6 text-white">Who I Am</h2>
             <p className="max-w-3xl mx-auto text-muted-foreground">
               I'm a Computer Science student specializing in Internet of Things.
               Passionate about programming and building innovative web
@@ -82,62 +82,44 @@ const Index = () => {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              viewport={{ once: true }}
-              className="glass-panel p-8 rounded-lg"
-            >
-              <div className="flex items-center justify-center w-16 h-16 bg-teal-500/10 rounded-lg mb-6 mx-auto">
-                <Code className="w-8 h-8 text-teal-400" />
-              </div>
-              <h3 className="text-xl font-semibold mb-4 text-center">
-                Web Development
-              </h3>
-              <p className="text-muted-foreground text-center">
-                Experienced in building modern, responsive web applications
-                using React.js, Next.js, and Node.js.
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="glass-panel p-8 rounded-lg"
-            >
-              <div className="flex items-center justify-center w-16 h-16 bg-teal-500/10 rounded-lg mb-6 mx-auto">
-                <GraduationCap className="w-8 h-8 text-teal-400" />
-              </div>
-              <h3 className="text-xl font-semibold mb-4 text-center">
-                Computer Science
-              </h3>
-              <p className="text-muted-foreground text-center">
-                Strong foundation in algorithms, data structures, and
-                programming principles.
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              viewport={{ once: true }}
-              className="glass-panel p-8 rounded-lg"
-            >
-              <div className="flex items-center justify-center w-16 h-16 bg-teal-500/10 rounded-lg mb-6 mx-auto">
-                <Briefcase className="w-8 h-8 text-teal-400" />
-              </div>
-              <h3 className="text-xl font-semibold mb-4 text-center">
-                Internet of Things
-              </h3>
-              <p className="text-muted-foreground text-center">
-                Specializing in IoT applications, integrating hardware and
-                software to create smart solutions.
-              </p>
-            </motion.div>
+            {[
+              {
+                icon: <Code className="w-8 h-8 text-brand-purple" />,
+                title: "Web Development",
+                desc: "Experienced in building modern, responsive web applications using React.js, Next.js, and Node.js.",
+              },
+              {
+                icon: <GraduationCap className="w-8 h-8 text-brand-purple" />,
+                title: "Computer Science",
+                desc: "Strong foundation in algorithms, data structures, and programming principles.",
+              },
+              {
+                icon: <Briefcase className="w-8 h-8 text-brand-purple" />,
+                title: "Internet of Things",
+                desc: "Specializing in IoT applications, integrating hardware and software to create smart solutions.",
+              },
+            ].map((item, i) => (
+              <motion.div
+                key={item.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.1 * i }}
+                viewport={{ once: true }}
+                whileHover={{
+                  scale: 1.025,
+                  boxShadow: "0 0 20px rgba(168,85,247,0.15)",
+                }}
+                className="glass-panel p-8 rounded-2xl border border-brand-purple/10 hover:border-brand-purple/30 transition-all duration-300"
+              >
+                <div className="flex items-center justify-center w-16 h-16 bg-brand-purple/10 rounded-lg mb-6 mx-auto">
+                  {item.icon}
+                </div>
+                <h3 className="text-xl font-semibold mb-4 text-center text-white">
+                  {item.title}
+                </h3>
+                <p className="text-muted-foreground text-center">{item.desc}</p>
+              </motion.div>
+            ))}
           </div>
 
           <motion.div
@@ -149,7 +131,7 @@ const Index = () => {
           >
             <Link
               to="/about"
-              className="inline-flex items-center px-6 py-3 bg-teal-500 text-white rounded-lg font-medium hover:bg-opacity-90 transition-all"
+              className="inline-flex items-center px-6 py-3 bg-brand-purple text-white rounded-lg font-medium hover:bg-brand-purple/90 transition-all"
             >
               More About Me
               <ArrowRight className="ml-2 h-4 w-4" />
